@@ -1,2 +1,2 @@
 # Bad-Translations
-Personal project to explore how layering translations impact the accuracy of translation
+Personal project to explore how layering translations impacts the accuracy of translation

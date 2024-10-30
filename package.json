@@ -1,0 +1,14 @@
+{
+    "name": "bad-translations",
+    "version": "1.0.0",
+    "description": "A simple tool to explore how layering translations impacts the accuracy of translation",
+    "main": "index.js",
+    "author": "Gretchen Eggers",
+    "license": "MIT",
+    "scripts": {
+        "start": "http-server -c-1 public"
+    },
+    "dependencies": {
+        "react": "^18.3.1"
+    }
+}

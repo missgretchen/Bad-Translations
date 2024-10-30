@@ -1,0 +1,44 @@
+Arguments: 
+  /Users/gretcheneggers/.nvm/versions/node/v18.16.0/bin/node /Users/gretcheneggers/.nvm/versions/node/v18.16.0/bin/yarn
+
+PATH: 
+  /Users/gretcheneggers/.nvm/versions/node/v18.16.0/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.16.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/gretcheneggers/Documents/Bad-Translations/package.json: Unexpected token } in JSON at position 367
+      at JSON.parse (<anonymous>)
+      at /Users/gretcheneggers/.nvm/versions/node/v18.16.0/lib/node_modules/yarn/lib/cli.js:1629:59
+      at Generator.next (<anonymous>)
+      at step (/Users/gretcheneggers/.nvm/versions/node/v18.16.0/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /Users/gretcheneggers/.nvm/versions/node/v18.16.0/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+      "name": "bad-translations",
+      "version": "1.0.0",
+      "description": "A simple tool to explore how layering translations impacts the accuracy of translation",
+      "main": "index.js",
+      "author": "Gretchen Eggers",
+      "license": "MIT",
+      "scripts": {
+          "start": "http-server -c-1 public"
+      },
+      "dependencies": {
+          "react": "^18.3.1",
+      }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
