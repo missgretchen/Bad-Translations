@@ -1,14 +1,16 @@
 import React from 'react';
-import { Select, Input, Button } from 'antd';
+import { Select, Input, Button, Flex } from 'antd';
+import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 
 interface TranslationInputProps {
     language: string,
     setLanguage: (newLanguage: string) => void,
     text: string,
     setText: (newText: string) => void,
-    onAddLayer: () => void,
-    onAddSection: () => void,
+    onInsertSection: () => void,
     // onSplit: (textToSplit: string, index: number) => void,
+    onAddLayer: () => void,
+    disableAddLayer: boolean,
     onDelete: () => void,
     disableDelete: boolean,
 }
@@ -18,13 +20,13 @@ const TranslationInput: React.FC<TranslationInputProps> = ({
     setLanguage,
     text,
     setText,
-    onAddLayer,
-    onAddSection,
+    onInsertSection,
     // onSplit,
+    onAddLayer,
+    disableAddLayer,
     onDelete,
     disableDelete,
 }) => {
-
     const languageOptions: object[] = [
         {label: 'English', value: 'en'},
         {label: 'Spanish', value: 'sp'},
@@ -32,18 +34,24 @@ const TranslationInput: React.FC<TranslationInputProps> = ({
     ];
     return (
         <>
-        <Select options={languageOptions} defaultValue={language} onChange={setLanguage} />
-        <Input defaultValue={text} onChange={(e) => setText(e.target.value)} />
-        <Button onClick={onAddSection}>
-            Add Section
-        </Button>
-        { disableDelete ?<Button onClick={onDelete}>
-            Remove Section
-        </Button> :
-        <span /> }
-        <Button onClick={onAddLayer}>
-            Add Layer
-        </Button>
+        <Flex vertical gap="small">
+            <Flex gap="small">
+                <Select options={languageOptions} defaultValue={language} onChange={setLanguage} style={{width: 200}}/>
+                <Input defaultValue={text} onChange={(e) => setText(e.target.value)} />
+                <Button shape="circle" type="primary" onClick={onInsertSection}>
+                    <PlusOutlined />
+                </Button>
+                { disableDelete ? <span /> : <Button shape="circle" onClick={onDelete}>
+                    <DeleteOutlined />
+                </Button>
+                }
+            </Flex>
+            
+            { disableAddLayer ? <span /> : <Button color="primary" variant="filled" onClick={onAddLayer}>
+                Add Layer
+            </Button>
+            }
+        </Flex>
         </>
     )
 }
