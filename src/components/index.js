@@ -1,2 +1,4 @@
 import TranslationInput from './TranslationInput';
-export { TranslationInput };
+import TranslationLayer from './TranslationLayer';
+
+export { TranslationInput, TranslationLayer };
