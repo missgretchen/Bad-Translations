@@ -1,6 +1,7 @@
 import React from 'react';
-import { Select, Input, Button, Flex } from 'antd';
+import { Input, Button, Flex } from 'antd';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import LanguageSelector from './LanguageSelector';
 
 interface TranslationInputProps {
     language: string,
@@ -27,16 +28,11 @@ const TranslationInput: React.FC<TranslationInputProps> = ({
     onDelete,
     disableDelete,
 }) => {
-    const languageOptions: object[] = [
-        {label: 'English', value: 'en'},
-        {label: 'Spanish', value: 'sp'},
-        {label: 'Portuguese', value:'pt'}
-    ];
     return (
         <>
         <Flex vertical gap="small">
             <Flex gap="small">
-                <Select options={languageOptions} defaultValue={language} onChange={setLanguage} style={{width: 200}}/>
+                <LanguageSelector language={language} setLanguage={setLanguage} />
                 <Input defaultValue={text} onChange={(e) => setText(e.target.value)} />
                 <Button shape="circle" type="primary" onClick={onInsertSection}>
                     <PlusOutlined />

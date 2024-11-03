@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Select, Flex } from 'antd';
+import { Flex } from 'antd';
 import { TranslationUnit } from '../types';
+import LanguageSelector from './LanguageSelector';
 
 interface TranslationLayerProps {
     ancestorTranslations: TranslationUnit[],
@@ -17,11 +18,6 @@ const TranslationLayer: React.FC<TranslationLayerProps> = ({
     outputLanguage,
     setOutputLanguage,
 }) => {
-    const languageOptions: object[] = [
-        {label: 'English', value: 'en'},
-        {label: 'Spanish', value: 'sp'},
-        {label: 'Portuguese', value:'pt'}
-    ];
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -46,10 +42,11 @@ const TranslationLayer: React.FC<TranslationLayerProps> = ({
         setLoading(true);
         translateAndUpdate(ancestorTranslations, outputLanguage);
     }, [ancestorTranslations, outputLanguage]);
+
     return (
         <>
         <Flex gap="small">
-            <Select options={languageOptions} defaultValue={outputLanguage} onChange={setOutputLanguage} style={{width: 200}}/>
+            <LanguageSelector language={outputLanguage} setLanguage={setOutputLanguage} />
             { loading ? 'Loading ...' : outputText }
         </Flex>
         </>
