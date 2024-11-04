@@ -1,13 +1,21 @@
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
-import { Flex} from 'antd';
+import { Flex, Button } from 'antd';
 import { TranslationInput, TranslationLayer } from './components';
 import { TranslationUnit } from './types';
 
 function App() {
-  const [inputLayer, setInputLayer] = useState<TranslationUnit[]>([{language: 'en', text: '', id: uuid()}]);
+  const getDefaultInputTranslationUnit: () => TranslationUnit = () => ({language: 'DETECT', text: '', id: uuid()});
+  const getDefaultOutputTranslationUnit: () => TranslationUnit = () => ({language: 'en', text: '', id: uuid()});
+  const [inputLayer, setInputLayer] = useState<TranslationUnit[]>([getDefaultInputTranslationUnit()]);
   const [translationLayers, setTranslationLayers] = useState<TranslationUnit[][]>([[]]);
-  const [outputLayer, setOutputLayer] = useState<TranslationUnit>({language: 'pt', text: '', id: uuid()});
+  const [outputLayer, setOutputLayer] = useState<TranslationUnit>(getDefaultOutputTranslationUnit());
+
+  const startOver = () => {
+    setInputLayer([getDefaultInputTranslationUnit()]);
+    setTranslationLayers([[]]);
+    setOutputLayer(getDefaultOutputTranslationUnit());
+  };
 
   const setInputLanguage = (newLanguage: string, index: number) => {
     const newInputLayer = [...inputLayer];
@@ -23,7 +31,7 @@ function App() {
 
   const onInsertSection = (index: number) => {
     const newInputLayer = [...inputLayer];
-    const newTranslationUnit = {language: 'en', text: '', id: uuid()};
+    const newTranslationUnit = getDefaultInputTranslationUnit();
     newInputLayer.splice(index + 1, 0, newTranslationUnit);
 
     const newTranslationLayers = [ ...translationLayers];
@@ -40,7 +48,7 @@ function App() {
 
   const onInsertLayer = (sectionIndex: number, layerIndex: number) => {
     const newTranslationLayers = [ ...translationLayers];
-    const newTranslationUnit = {language: 'pt', text: '', id: uuid()};
+    const newTranslationUnit = getDefaultOutputTranslationUnit();
     newTranslationLayers[sectionIndex].splice(layerIndex + 1, 0, newTranslationUnit);
     setTranslationLayers(newTranslationLayers);
   };
@@ -85,6 +93,7 @@ function App() {
 
   return (
     <>
+      <Button type="primary" onClick={startOver}> Start Over </Button>
       <Flex gap="small">
         {inputLayer.map((inputTranslationUnit, sectionIndex) => (
           <Flex gap="small" vertical key={sectionIndex}>

@@ -13,7 +13,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
     language,
     setLanguage
 }) => {
-    const languageOptions = supportedLanguages.map(x => ({label: x.language, value: x.code}));
+    const languageOptions = [ {label: 'Detect', value: 'DETECT'}, ...supportedLanguages.map(x => ({label: x.language, value: x.code}))];
     return (
         <>
         <Select options={languageOptions} defaultValue={language} onChange={setLanguage} style={{width: 200}} showSearch={true} optionFilterProp='label'/>
