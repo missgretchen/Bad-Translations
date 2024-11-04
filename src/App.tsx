@@ -53,6 +53,12 @@ function App() {
     setTranslationLayers(newTranslationLayers);
   };
 
+  const onRemoveLayer = (sectionIndex: number, layerIndex: number) => {
+    const newTranslationLayers = [ ...translationLayers];
+    newTranslationLayers[sectionIndex].splice(layerIndex, 1);
+    setTranslationLayers(newTranslationLayers);
+  };
+
   const getParentTranslationUnit = (sectionIndex: number, layerIndex: number) => {
     if(layerIndex === 0) {
       return inputLayer[sectionIndex];
@@ -117,6 +123,8 @@ function App() {
               setOutputText={(newText: string) => setOutputText(newText, sectionIndex, layerIndex)}
               outputLanguage={translationLayerUnit.language}
               setOutputLanguage={(newLanguage: string) => setOutputLanguage(newLanguage, sectionIndex, layerIndex)}
+              allowClear={true}
+              onClear={() => onRemoveLayer(sectionIndex, layerIndex)}
             />
           ))}
         </Flex>

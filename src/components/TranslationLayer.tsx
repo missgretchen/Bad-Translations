@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Flex } from 'antd';
+import { Flex, Button } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import { TranslationUnit } from '../types';
 import LanguageSelector from './LanguageSelector';
 
@@ -9,6 +10,8 @@ interface TranslationLayerProps {
     setOutputText: (newText: string) => void,
     outputLanguage: string,
     setOutputLanguage: (newLanguage: string) => void,
+    allowClear: boolean,
+    onClear: () => void,
 }
 
 const TranslationLayer: React.FC<TranslationLayerProps> = ({
@@ -17,6 +20,8 @@ const TranslationLayer: React.FC<TranslationLayerProps> = ({
     setOutputText,
     outputLanguage,
     setOutputLanguage,
+    allowClear = false,
+    onClear,
 }) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -48,6 +53,10 @@ const TranslationLayer: React.FC<TranslationLayerProps> = ({
         <Flex gap="small">
             <LanguageSelector language={outputLanguage} setLanguage={setOutputLanguage} />
             { loading ? 'Loading ...' : outputText }
+            { allowClear ? <Button shape="circle" onClick={onClear}>
+                    <DeleteOutlined />
+                </Button> : <span /> 
+                }
         </Flex>
         </>
     )
